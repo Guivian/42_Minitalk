@@ -6,7 +6,7 @@
 #    By: lbarbosa <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/12 19:14:53 by lbarbosa          #+#    #+#              #
-#    Updated: 2022/05/12 19:38:35 by lbarbosa         ###   ########.fr        #
+#    Updated: 2022/05/25 16:21:12 by lbarbosa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ $(NAME): $(C_SRC1)
 
 $(NAME2): $(C_SRC2)
 	@cd ft_printf && make && cd ..
-	@$(CC) $(CFLAGS) $(NAME) minitalk.h $(C_SRC1) ft_printf/libftprintf.a
+	@$(CC) $(CFLAGS) $(NAME2) minitalk.h $(C_SRC2) ft_printf/libftprintf.a
 
 clean:
 	@cd ft_printf && make clean && cd ..

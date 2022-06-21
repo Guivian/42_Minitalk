@@ -6,7 +6,7 @@
 /*   By: lbarbosa <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 18:10:49 by lbarbosa          #+#    #+#             */
-/*   Updated: 2022/06/14 19:58:23 by lbarbosa         ###   ########.fr       */
+/*   Updated: 2022/06/20 18:27:46 by lbarbosa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,16 @@ void	handler_sigusr(int signum)
 	static int	bits = 0;
 
 	if (signum == SIGUSR1)
-	{
-		ft_printf("1");
 		c |= 128 >> bits;
-	}
 	else if (signum == SIGUSR2)
-		ft_printf("0");
+		c ^= 128 >> bits;
+	bits++;
+	if (bits == 8)
+	{
+		ft_printf("%c", c);
+		bits = 0;
+		c = 0xFF;
+	}
 }
 
 int	main(void)

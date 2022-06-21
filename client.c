@@ -6,7 +6,7 @@
 /*   By: lbarbosa <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 18:04:25 by lbarbosa          #+#    #+#             */
-/*   Updated: 2022/06/14 19:55:47 by lbarbosa         ###   ########.fr       */
+/*   Updated: 2022/06/20 18:24:21 by lbarbosa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,22 @@ void	send_signal(char *msg, int pid)
 	int	i;
 	int	bitshift;
 
-	bitshift = -1;
 	i = -1;
 	while (msg[++i])
 	{
+		bitshift = -1;
 		while (++bitshift < 8)
 		{
-			if (msg[i] & 128 >> bitshift)
-				kill(pid, SIGUSR1);
+			if (msg[i] & (128 >> bitshift))
+			{
+				if (kill(pid, SIGUSR1) == -1)
+					exit(EXIT_FAILURE);
+			}
 			else
-				kill(pid, SIGUSR2);
+			{
+				if (kill(pid, SIGUSR2) == -1)
+					exit(EXIT_FAILURE);
+			}
 			usleep(50);
 		}
 	}
